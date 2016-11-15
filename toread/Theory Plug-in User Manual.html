@@ -1,0 +1,392 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">body { margin-left:0;margin-right:0;margin-top:0; }#google-cache-hdr {background:#f5f5f5 !important;font:13px arial,sans-serif !important;text-align:left !important;color:#202020 !important;border:0 !important;margin:0 !important;border-bottom:1px solid #cecece !important;line-height:16px !important ;padding:16px 28px 24px 28px !important;}#google-cache-hdr * {display:inline !important;font:inherit !important;text-align:inherit !important;color:inherit !important;line-height:inherit !important;background:none !important;border:0 !important;margin:0 !important;padding:0 !important;letter-spacing:0 !important;}#google-cache-hdr a {text-decoration:none !important;color:#1a0dab !important;}#google-cache-hdr a:hover { text-decoration:underline !important; }#google-cache-hdr a:visited { color:#609 !important; }#google-cache-hdr div { display:block !important;margin-top:4px !important; }#google-cache-hdr b {font-weight:bold !important;display:inline-block !important;direction:ltr !important;}pre { word-wrap:break-word; }pre { white-space:pre-wrap; }</style></head><body vlink="blue" link="blue" bgcolor="#ffffff"><div id="google-cache-hdr" dir="ltr"><div>This is the html version of the file <a href="http://wiki.event-b.org/images/Theory_Plugin.pdf" dir="ltr">http://wiki.event-b.org/images/Theory_Plugin.pdf</a>.<br><b>Google</b> automatically generates html versions of documents as we crawl the web.</div></div><div style="position:relative;margin:8px;">
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Creator" content="LaTeX with hyperref package">
+<meta name="Producer" content="pdfTeX-1.40.13">
+<meta name="CreationDate" content="D:20140430141208+01'00'">
+<meta name="ModDate" content="D:20140430141208+01'00'">
+<meta name="Fullbanner" content="This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) kpathsea version 6.1.0">
+<title>Theory Plug-in User Manual</title>
+
+<table width="100%" border="0"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="1"><b>Page 1</b></a></font></td></tr></tbody></table><font size="4" face="Times"><span style="font-size:23px;font-family:Times">
+<div style="position:absolute;top:422;left:310"><nobr>Theory Plug-in User Manual</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:15px;font-family:Times">
+<div style="position:absolute;top:471;left:305"><nobr>Issam Maamria, Asieh Salehi Fathabadi</nobr></div>
+<div style="position:absolute;top:492;left:354"><nobr>University of Southampton</nobr></div>
+<div style="position:absolute;top:527;left:404"><nobr>April 30, 2014</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:584;left:223"><nobr>The Theory plug-in is a contribution to the Rodin platform that facilitates</nobr></div>
+<div style="position:absolute;top:602;left:201"><nobr>the specification, validation, deployment and use of language and proof</nobr></div>
+<div style="position:absolute;top:619;left:201"><nobr>extensions for the Event-B methodology. Language extensions are additions to</nobr></div>
+<div style="position:absolute;top:637;left:201"><nobr>the Event-B mathematical language in the form of 1) datatypes, 2) operators</nobr></div>
+<div style="position:absolute;top:655;left:201"><nobr>and 3) axiomatic definitions. Proof extensions are additions to the Event-B</nobr></div>
+<div style="position:absolute;top:673;left:201"><nobr>proving infrastructure in the form of rewrite rules, inference rules and polymor-</nobr></div>
+<div style="position:absolute;top:691;left:201"><nobr>phic theorems. The specification of extensions is achieved by means of theories</nobr></div>
+<div style="position:absolute;top:709;left:213"><nobr>. The validation of extensions is achieved by means of proof obligations when-</nobr></div>
+<div style="position:absolute;top:727;left:201"><nobr>ever appropriate. This user manual provides a comprehensive overview of the</nobr></div>
+<div style="position:absolute;top:745;left:201"><nobr>plug-in’s functionality and capabilities.</nobr></div>
+<div style="position:absolute;top:763;left:223"><nobr>For a quick start guide, the user can skip to Section <a href="#4">3.</a></nobr></div>
+<div style="position:absolute;top:785;left:247"><nobr>The Event-B mathematical language refers to the language used to</nobr></div>
+<div style="position:absolute;top:803;left:201"><nobr>write axioms, invariants, guards etc. in Event-B models.</nobr></div>
+<div style="position:absolute;top:841;left:246"><nobr>Event-B theories are Rodin file just like contexts and machines.</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:19px;font-family:Times">
+<div style="position:absolute;top:885;left:201"><nobr>1 Motivation</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:923;left:201"><nobr>Work on the Theory plug-in started as an effort to create a Rule-based Prover</nobr></div>
+<div style="position:absolute;top:941;left:201"><nobr>for Event-B much like the ML prover in Atelier-B. The Rule-based Prover, as it</nobr></div>
+<div style="position:absolute;top:959;left:201"><nobr>was known then, supported the definition, validation and use of rewrite rules.</nobr></div>
+<div style="position:absolute;top:976;left:201"><nobr>The Theory plug-in is the successor of the Rule-based Prover, and offers much</nobr></div>
+<div style="position:absolute;top:994;left:201"><nobr>more functionality.</nobr></div>
+<div style="position:absolute;top:1012;left:223"><nobr>Prior to Rodin v2.0, the mathematical language used in Event-B was fixed.</nobr></div>
+<div style="position:absolute;top:1030;left:201"><nobr>As such, it was not possible to define reusable polymorphic operators. A</nobr></div>
+<div style="position:absolute;top:1048;left:201"><nobr>workaround was to define any required operators as set constructs in contexts.</nobr></div>
+<div style="position:absolute;top:1066;left:201"><nobr>Originally, contexts were supposed to provide a parametrization of machines.</nobr></div>
+<div style="position:absolute;top:1084;left:201"><nobr>The aforementioned limitations of the Event-B language lead to users to use</nobr></div>
+<div style="position:absolute;top:1102;left:201"><nobr>contexts for purposes for which they were not intentionally devised. Examples</nobr></div>
+<div style="position:absolute;top:1120;left:201"><nobr>of operators that can be useful to users include the sequence operator (which</nobr></div>
+<div style="position:absolute;top:1138;left:201"><nobr>was present in classical B mathematical language) and the bag operator.</nobr></div>
+<div style="position:absolute;top:1156;left:223"><nobr>In Rodin v2.0, a dynamic parser has been implemented for the Event-B AST.</nobr></div>
+<div style="position:absolute;top:1174;left:201"><nobr>The Theory plug-in was a natural candidate for defining and using mathematical</nobr></div>
+<div style="position:absolute;top:1219;left:455"><nobr>1</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:1363;left:0"><hr><table width="100%" border="0"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="2"><b>Page 2</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:1555;left:201"><nobr>extensions. To provide a comprehensive platform, cover for a wider range of</nobr></div>
+<div style="position:absolute;top:1573;left:201"><nobr>proof rules was also needed.</nobr></div>
+<div style="position:absolute;top:1595;left:246"><nobr>ML is a rule-based prover as opposed to the semi-decision procedure PP.</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:19px;font-family:Times">
+<div style="position:absolute;top:1640;left:201"><nobr>2 Capabilities</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:1677;left:201"><nobr>The Theory plug-in has the following capabilities:</nobr></div>
+<div style="position:absolute;top:1707;left:219"><nobr>1. Theory Definition:</nobr></div>
+<div style="position:absolute;top:1737;left:244"><nobr>(a) Definition of operators: operators can be defined as predicate or</nobr></div>
+<div style="position:absolute;top:1755;left:271"><nobr>expression operators. An expression operator is an operator that</nobr></div>
+<div style="position:absolute;top:1773;left:271"><nobr>”returns” an expression, an example existing operator is card. A</nobr></div>
+<div style="position:absolute;top:1791;left:271"><nobr>predicate operator is one that ”returns” a predicate, an example ex-</nobr></div>
+<div style="position:absolute;top:1809;left:271"><nobr>isting predicate operator is finite.</nobr></div>
+<div style="position:absolute;top:1833;left:243"><nobr>(b) Definition of datatypes: datatypes are defined by supplying the</nobr></div>
+<div style="position:absolute;top:1851;left:271"><nobr>types on which they are polymorphic, a set of constructors one of</nobr></div>
+<div style="position:absolute;top:1869;left:271"><nobr>which has to be a base constructor. Each constructor may or may</nobr></div>
+<div style="position:absolute;top:1886;left:271"><nobr>not have destructors.</nobr></div>
+<div style="position:absolute;top:1910;left:245"><nobr>(c) Definition of axiomatic definitions: axiomatic definitions are de-</nobr></div>
+<div style="position:absolute;top:1928;left:271"><nobr>fined by supplying the types, a set of operators, and a set of axioms.</nobr></div>
+<div style="position:absolute;top:1952;left:243"><nobr>(d) Definition of rewrite rules: rewrite rules are one-directional equal-</nobr></div>
+<div style="position:absolute;top:1970;left:271"><nobr>ities that can be applied from left to right. The Theory plug-in can</nobr></div>
+<div style="position:absolute;top:1988;left:271"><nobr>be used to define rewrite rules.</nobr></div>
+<div style="position:absolute;top:2012;left:245"><nobr>(e) Definition of inference rules: inference rules can be used to infer</nobr></div>
+<div style="position:absolute;top:2030;left:271"><nobr>new hypotheses, split a goal into sub-goals or discharge sequents.</nobr></div>
+<div style="position:absolute;top:2054;left:246"><nobr>(f) Definition of polymorphic theorems: theorems can be defined</nobr></div>
+<div style="position:absolute;top:2072;left:271"><nobr>and validated once, and can then be imported into sequents of proof</nobr></div>
+<div style="position:absolute;top:2090;left:271"><nobr>obligations if a suitable type instantiation is available.</nobr></div>
+<div style="position:absolute;top:2114;left:244"><nobr>(g) Validation of extensions: where appropriate, proof obligations are</nobr></div>
+<div style="position:absolute;top:2132;left:271"><nobr>generated to ensure soundness of extensions. This includes, proof</nobr></div>
+<div style="position:absolute;top:2149;left:271"><nobr>obligations for validity of inference and rewrite rules, as well as proof</nobr></div>
+<div style="position:absolute;top:2167;left:271"><nobr>obligations to validate operator properties such as associativity and</nobr></div>
+<div style="position:absolute;top:2185;left:271"><nobr>commutativity.</nobr></div>
+<div style="position:absolute;top:2215;left:219"><nobr>2. Theory Deployment: this step signifies that a theory is ready for use.</nobr></div>
+<div style="position:absolute;top:2233;left:238"><nobr>Theories can be deployed after they have been optionally validated by</nobr></div>
+<div style="position:absolute;top:2251;left:238"><nobr>the user. It is strongly advisable to discharge all proof obligations before</nobr></div>
+<div style="position:absolute;top:2269;left:238"><nobr>deployment.</nobr></div>
+<div style="position:absolute;top:2299;left:201"><nobr>Once a theory has been deployed and introduced to its designated project, all</nobr></div>
+<div style="position:absolute;top:2317;left:201"><nobr>its extensions (mathematical and proof extensions) can be used in models. In</nobr></div>
+<div style="position:absolute;top:2335;left:201"><nobr>later sections, we show the scopes of theory availability.</nobr></div>
+<div style="position:absolute;top:2407;left:455"><nobr>2</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:2551;left:0"><hr><table width="100%" border="0"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="3"><b>Page 3</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:2746;left:225"><nobr>In the Event-B mathematical language, predicates (known as formulae in</nobr></div>
+<div style="position:absolute;top:2764;left:201"><nobr>most literature) and expressions (known as terms) are two separate syntactic</nobr></div>
+<div style="position:absolute;top:2782;left:201"><nobr>categories. Expressions have a type. Predicate do not.</nobr></div>
+<div style="position:absolute;top:3595;left:455"><nobr>3</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:3739;left:0"><hr><table width="100%" border="0"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="4"><b>Page 4</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:19px;font-family:Times">
+<div style="position:absolute;top:3926;left:201"><nobr>3 Quick Start</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:3964;left:201"><nobr>In this section, we step through a simple tutorial on how to define and use a</nobr></div>
+<div style="position:absolute;top:3981;left:201"><nobr>simple theory. Click on the links above to navigate through this tutorial.</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:15px;font-family:Times">
+<div style="position:absolute;top:4021;left:201"><nobr>3.1 Install Theory Plug-in</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:4051;left:201"><nobr>Considering figure <a href="#4">1,</a> the installation or update for the Theory plug-in is avail-</nobr></div>
+<div style="position:absolute;top:4069;left:201"><nobr>able under the main Rodin Update site<a href="http://rodin-b-sharp.sourceforge.net/updates"> (http://rodin-b-sharp.sourceforge.</a></nobr></div>
+<div style="position:absolute;top:4088;left:201"><nobr><a href="http://rodin-b-sharp.sourceforge.net/updates">net/updates)</a> under the category ”Modelling Extensions”. Like always, af-</nobr></div>
+<div style="position:absolute;top:4105;left:201"><nobr>ter the installation, restarting Rodin is recommended. For more details, see</nobr></div>
+<div style="position:absolute;top:4124;left:201"><nobr><a href="http://wiki.event-b.org/index.php/Theory_News_and_Support">http://wiki.event-b.org/index.php/Theory_News_and_Support.</a></nobr></div>
+<div style="position:absolute;top:4591;left:353"><nobr>Figure 1: Install Theory Plug-in</nobr></div>
+<div style="position:absolute;top:4627;left:223"><nobr>Once the Theory plug-in is successfully installed, menu entries will be added</nobr></div>
+<div style="position:absolute;top:4645;left:201"><nobr>in certain places, see figure<a href="#5"> </a>2. In particular, the Event-B Explorer will have an</nobr></div>
+<div style="position:absolute;top:4663;left:201"><nobr>additional button</nobr></div>
+<div style="position:absolute;top:4663;left:338"><nobr>that initiates the wizard to create new theory files.</nobr></div>
+<div style="position:absolute;top:4783;left:455"><nobr>4</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:4927;left:0"><hr><table width="100%" border="0"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="5"><b>Page 5</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:5263;left:291"><nobr>Figure 2: New Theory Button in Event-B Explorer</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:15px;font-family:Times">
+<div style="position:absolute;top:5309;left:201"><nobr>3.2 Create A New Theory</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:5339;left:201"><nobr>An additional button</nobr></div>
+<div style="position:absolute;top:5339;left:364"><nobr>(red-circled in figure<a href="#5"> </a>2) should appear in the Event-B</nobr></div>
+<div style="position:absolute;top:5357;left:201"><nobr>Explorer. By clicking the button , a wizard that enables the creation of a new</nobr></div>
+<div style="position:absolute;top:5375;left:201"><nobr>theory is initiated. Figure<a href="#5"> 3</a> shows the wizard in action.</nobr></div>
+<div style="position:absolute;top:5753;left:344"><nobr>Figure 3: New Theory File Wizard</nobr></div>
+<div style="position:absolute;top:5789;left:223"><nobr>In the wizard, specify the parent project of the theory and a theory name.</nobr></div>
+<div style="position:absolute;top:5807;left:201"><nobr>The project can be selected using the button on the right hand side of project</nobr></div>
+<div style="position:absolute;top:5825;left:201"><nobr>name text field (akin to selecting a project when creating a new Event-B com-</nobr></div>
+<div style="position:absolute;top:5843;left:201"><nobr>ponent). Click the Finish button to create the theory. If there are no name</nobr></div>
+<div style="position:absolute;top:5861;left:201"><nobr>clashes between the name of the new theory and any existing resources, you</nobr></div>
+<div style="position:absolute;top:5879;left:201"><nobr>should get a theory editor opened up as depicted in figure <a href="#6">4.</a></nobr></div>
+<div style="position:absolute;top:5897;left:223"><nobr>The theory editor has two pages: an Edit page and an HTML (i.e., pretty</nobr></div>
+<div style="position:absolute;top:5915;left:201"><nobr>print) page. The edit page corresponds to the structured editor. The HTML</nobr></div>
+<div style="position:absolute;top:5971;left:455"><nobr>5</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:6115;left:0"><hr><table width="100%" border="0"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="6"><b>Page 6</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:6717;left:364"><nobr>Figure 4: The Theory Editor</nobr></div>
+<div style="position:absolute;top:6765;left:201"><nobr>page is a pretty print view of the theory.</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:15px;font-family:Times">
+<div style="position:absolute;top:6804;left:201"><nobr>3.3 Add a Type Parameter</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:6834;left:201"><nobr>Type parameters in a theory specify the types on which new definitions and rules</nobr></div>
+<div style="position:absolute;top:6852;left:201"><nobr>may be polymorphic. For instance, a theory of sequences can be polymorphic</nobr></div>
+<div style="position:absolute;top:6870;left:201"><nobr>on one type and that is the type of elements it may hold.</nobr></div>
+<div style="position:absolute;top:6888;left:223"><nobr>Type parameters are similar in nature to carrier sets in contexts. To create</nobr></div>
+<div style="position:absolute;top:6909;left:201"><nobr>a new type parameter, click on button</nobr></div>
+<div style="position:absolute;top:6909;left:473"><nobr>under the Type Parameters section of</nobr></div>
+<div style="position:absolute;top:6927;left:201"><nobr>the structured editor, and specify the name of the type parameter (see figure <a href="#6">5)</a>.</nobr></div>
+<div style="position:absolute;top:7028;left:369"><nobr>Figure 5: Type Parameters</nobr></div>
+<div style="position:absolute;top:7068;left:249"><nobr>Type parameters are expected to be a legal Event-B identifier. For</nobr></div>
+<div style="position:absolute;top:7086;left:201"><nobr>example, 2ident is not a legal identifier.</nobr></div>
+<div style="position:absolute;top:7112;left:251"><nobr>As a convention, type parameters are specified as upper case strings</nobr></div>
+<div style="position:absolute;top:7159;left:455"><nobr>6</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:7303;left:0"><hr><table width="100%" border="0"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="7"><b>Page 7</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:7495;left:201"><nobr>(same as context’s carrier sets).</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:15px;font-family:Times">
+<div style="position:absolute;top:7533;left:201"><nobr>3.4 Create an Operator Definition</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:7563;left:201"><nobr>Event-B mathematical language has many useful operators. Examples include</nobr></div>
+<div style="position:absolute;top:7581;left:201"><nobr>cardinality operator card, the finiteness predicate operator finite and the func-</nobr></div>
+<div style="position:absolute;top:7599;left:201"><nobr>tion application .(.). Other useful operators can be defined using the Theory</nobr></div>
+<div style="position:absolute;top:7617;left:201"><nobr>plug-in. Figure <a href="#7">6</a> shows a definition of a sequence operator.</nobr></div>
+<div style="position:absolute;top:7849;left:329"><nobr>Figure 6: Sequence Operator Definition</nobr></div>
+<div style="position:absolute;top:7882;left:223"><nobr>Note the numbering in figure <a href="#7">6.</a> The following explains each part of the</nobr></div>
+<div style="position:absolute;top:7900;left:201"><nobr>definition:</nobr></div>
+<div style="position:absolute;top:7924;left:219"><nobr>1. Syntax Symbol: this specifies the syntax token that will be reserved for</nobr></div>
+<div style="position:absolute;top:7942;left:238"><nobr>the new operator (sequence in our example). It should not clash with any</nobr></div>
+<div style="position:absolute;top:7960;left:238"><nobr>previously defined symbol in the mathematical language available to the</nobr></div>
+<div style="position:absolute;top:7978;left:238"><nobr>theory.</nobr></div>
+<div style="position:absolute;top:8005;left:219"><nobr>2. Syntactic Class: this specifies whether the new operator is an expression</nobr></div>
+<div style="position:absolute;top:8023;left:238"><nobr>operator or a predicate operator. For example, the cardinality operator</nobr></div>
+<div style="position:absolute;top:8041;left:238"><nobr>card is an expression operator of integer type, and the finiteness operator</nobr></div>
+<div style="position:absolute;top:8059;left:238"><nobr>finite is a predicate operator. In our case, the sequence operator is an</nobr></div>
+<div style="position:absolute;top:8077;left:238"><nobr>expression operator. The button can be toggled off if a predicate operator</nobr></div>
+<div style="position:absolute;top:8095;left:238"><nobr>is required instead.</nobr></div>
+<div style="position:absolute;top:8122;left:219"><nobr>3. Notation: this specifies whether the symbols is a prefix or an infix opera-</nobr></div>
+<div style="position:absolute;top:8140;left:238"><nobr>tor. In the existing mathematical language, + is an infix operator whereas</nobr></div>
+<div style="position:absolute;top:8158;left:238"><nobr>partition is a prefix predicate operator. In our example, the sequence op-</nobr></div>
+<div style="position:absolute;top:8176;left:238"><nobr>erator is specified as prefix.</nobr></div>
+<div style="position:absolute;top:8203;left:219"><nobr>4. Associativity: this specifies whether the operator is associative. Note</nobr></div>
+<div style="position:absolute;top:8221;left:238"><nobr>that this has semantic implications, and as such a proof obligation is</nobr></div>
+<div style="position:absolute;top:8239;left:238"><nobr>generated to check the associativity property.</nobr></div>
+<div style="position:absolute;top:8266;left:219"><nobr>5. Commutativity: this specifies whether the operator is commutative.</nobr></div>
+<div style="position:absolute;top:8284;left:238"><nobr>Note that this has semantic implications, and as such a proof obligation</nobr></div>
+<div style="position:absolute;top:8302;left:238"><nobr>is generated to check the commutativity property.</nobr></div>
+<div style="position:absolute;top:8347;left:455"><nobr>7</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:8491;left:0"><hr><table width="100%" border="0"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="8"><b>Page 8</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:8683;left:219"><nobr>6. Operator Arguments: an operator may have a number of arguments</nobr></div>
+<div style="position:absolute;top:8701;left:238"><nobr>(all of which may be expressions).</nobr></div>
+<div style="position:absolute;top:8729;left:219"><nobr>7. Argument Identifier: this specifies the name of the argument of the</nobr></div>
+<div style="position:absolute;top:8747;left:238"><nobr>operator. It has to be a legal Event-B identifier (similar to carrier sets,</nobr></div>
+<div style="position:absolute;top:8764;left:238"><nobr>constant, variables etc.).</nobr></div>
+<div style="position:absolute;top:8792;left:219"><nobr>8. Argument Type: this specifies the type of the argument. In our case,</nobr></div>
+<div style="position:absolute;top:8810;left:238"><nobr>the sequence operator takes a set of type A. Since A is a type parameter,</nobr></div>
+<div style="position:absolute;top:8828;left:238"><nobr>the sequence is polymorphic.</nobr></div>
+<div style="position:absolute;top:8856;left:219"><nobr>9. Direct Definition: this provides the direct definition of the operator.</nobr></div>
+<div style="position:absolute;top:8874;left:238"><nobr>In our case (see the red-boxed field), it asserts that sequences are total</nobr></div>
+<div style="position:absolute;top:8892;left:238"><nobr>functions from a contiguous integer range starting at 1 to the set a the</nobr></div>
+<div style="position:absolute;top:8910;left:238"><nobr>argument of the operator seq.</nobr></div>
+<div style="position:absolute;top:8965;left:223"><nobr>• Only operators that take two arguments of the same type can be tagged</nobr></div>
+<div style="position:absolute;top:8984;left:238"><nobr>as commutative. Of course, then, one has to prove the mathematical</nobr></div>
+<div style="position:absolute;top:9002;left:238"><nobr>property.</nobr></div>
+<div style="position:absolute;top:9029;left:223"><nobr>• An operator can be tagged as being associative if it satisfies the three</nobr></div>
+<div style="position:absolute;top:9048;left:238"><nobr>conditions: (1) it is an expression operator, (2) it takes two (or more)</nobr></div>
+<div style="position:absolute;top:9066;left:238"><nobr>arguments of the same type, (3) the type of the operator is the same as</nobr></div>
+<div style="position:absolute;top:9084;left:238"><nobr>that of its arguments. Of course, then, one has to prove the mathematical</nobr></div>
+<div style="position:absolute;top:9102;left:238"><nobr>property.</nobr></div>
+<div style="position:absolute;top:9129;left:223"><nobr>• Operators that are tagged associative have to be tagged as infix as well.</nobr></div>
+<div style="position:absolute;top:9156;left:223"><nobr>• The argument type can be a type or a set expression. If the argument</nobr></div>
+<div style="position:absolute;top:9175;left:238"><nobr>type is a set expression, then the type of the argument is inferred. Fur-</nobr></div>
+<div style="position:absolute;top:9193;left:238"><nobr>thermore, the additional restriction (i.e., that the argument belongs to a</nobr></div>
+<div style="position:absolute;top:9211;left:238"><nobr>set expression) is added as a well-definedness condition for the operator.</nobr></div>
+<div style="position:absolute;top:9271;left:223"><nobr>• As a convention, names of operators should be lower case.</nobr></div>
+<div style="position:absolute;top:9299;left:223"><nobr>• As a convention, names of operator arguments should be lower case.</nobr></div>
+<div style="position:absolute;top:9325;left:223"><nobr>The operator in figure <a href="#9">7 </a>defines size for sequences.</nobr></div>
+<div style="position:absolute;top:9343;left:223"><nobr>This definition asserts that the operator seqSize takes one argument of type</nobr></div>
+<div style="position:absolute;top:9365;left:201"><nobr>Z ↔ A. This definition, also, triggers a proof obligation to prove the strength of</nobr></div>
+<div style="position:absolute;top:9379;left:201"><nobr>the well-definedness condition provided. Namely, one has to prove that ∀s · s ∈</nobr></div>
+<div style="position:absolute;top:9397;left:201"><nobr>seq(A) =⇒ finite(s). We leave this as an exercise to the reader.</nobr></div>
+<div style="position:absolute;top:9415;left:223"><nobr>Figure <a href="#9">8 </a>is a definition of a predicate operator.</nobr></div>
+<div style="position:absolute;top:9433;left:223"><nobr>The definition of seqIsEmpty does not trigger any proof obligation for well-</nobr></div>
+<div style="position:absolute;top:9451;left:201"><nobr>definedness strength. This is due to the fact that the corresponding condition</nobr></div>
+<div style="position:absolute;top:9469;left:201"><nobr>is a trivial predicate, namely: ∀s · s ∈ seq(A) =⇒ s ∈ seq(A).</nobr></div>
+<div style="position:absolute;top:9487;left:223"><nobr>The head operator on sequences can be defined as in figure <a href="#9">9.</a></nobr></div>
+<div style="position:absolute;top:9535;left:455"><nobr>8</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:9679;left:0"><hr><table width="100%" border="0"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="9"><b>Page 9</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:10015;left:314"><nobr>Figure 7: Sequence Size Operator Definition</nobr></div>
+<div style="position:absolute;top:10208;left:320"><nobr>Figure 8: A Predicate Operator Definition</nobr></div>
+<div style="position:absolute;top:10420;left:310"><nobr>Figure 9: Sequence Head Operator Definition</nobr></div>
+<div style="position:absolute;top:10456;left:223"><nobr>Figure <a href="#10">10 </a>shows the well-definedness strength proof obligation corresponding</nobr></div>
+<div style="position:absolute;top:10474;left:201"><nobr>to the previous definition of seqHead.</nobr></div>
+<div style="position:absolute;top:10723;left:455"><nobr>9</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:10867;left:0"><hr><table width="100%" border="0"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="10"><b>Page 10</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:11238;left:313"><nobr>Figure 10: Sequence Head WD Strength PO</nobr></div>
+<div style="position:absolute;top:11274;left:223"><nobr>As a summary, have a look at figure<a href="#10"> 11</a> which is taken from the HTML view</nobr></div>
+<div style="position:absolute;top:11292;left:201"><nobr>of our theory.</nobr></div>
+<div style="position:absolute;top:11713;left:330"><nobr>Figure 11: Various Sequence Operators</nobr></div>
+<div style="position:absolute;top:11911;left:451"><nobr>10</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:12055;left:0"><hr><table width="100%" border="0"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="11"><b>Page 11</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:12247;left:223"><nobr>The proof obligations associated with an operator definition are the follow-</nobr></div>
+<div style="position:absolute;top:12265;left:201"><nobr>ing:</nobr></div>
+<div style="position:absolute;top:12293;left:219"><nobr>1. ./Op-WD operator well-definedness strength if a well-definedness condi-</nobr></div>
+<div style="position:absolute;top:12311;left:238"><nobr>tion is explicitly specified.</nobr></div>
+<div style="position:absolute;top:12340;left:219"><nobr>2. ./Op-COMMUT the commutativity proof obligation, generated if the</nobr></div>
+<div style="position:absolute;top:12358;left:238"><nobr>operator is tagged as commutative.</nobr></div>
+<div style="position:absolute;top:12387;left:219"><nobr>3. ./Op-ASSOC the associativity proof obligation, generated if the operator</nobr></div>
+<div style="position:absolute;top:12405;left:238"><nobr>is tagged as associative.</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:15px;font-family:Times">
+<div style="position:absolute;top:12444;left:201"><nobr>3.5 Specify a Polymorphic Theorem</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:12474;left:201"><nobr>A polymorphic theorem is no different, in principle, from theorems defined in</nobr></div>
+<div style="position:absolute;top:12492;left:201"><nobr>contexts and machines. The Theory plug-in, however, provides facilities to</nobr></div>
+<div style="position:absolute;top:12510;left:201"><nobr>instantiate and use these theorems in proofs. See the example in figure <a href="#11">12.</a></nobr></div>
+<div style="position:absolute;top:12607;left:325"><nobr>Figure 12: Sequence Finiteness Theorem</nobr></div>
+<div style="position:absolute;top:12642;left:223"><nobr>The previous theorem articulates the fact the sequences as specified in our</nobr></div>
+<div style="position:absolute;top:12660;left:201"><nobr>example are finite. As with theorems in contexts and machines, you have to</nobr></div>
+<div style="position:absolute;top:12678;left:201"><nobr>prove validity and well-definedness of the theorem. The proof obligations asso-</nobr></div>
+<div style="position:absolute;top:12696;left:201"><nobr>ciated with a theorem are the following:</nobr></div>
+<div style="position:absolute;top:12727;left:219"><nobr>1. ./S-THM the validity proof obligation.</nobr></div>
+<div style="position:absolute;top:12756;left:219"><nobr>2. ./WD-THM the well-definedness proof obligation.</nobr></div>
+<div style="position:absolute;top:12787;left:223"><nobr>Figure <a href="#11">13 </a>shows other theorems that can be defined in relation to our theory</nobr></div>
+<div style="position:absolute;top:12805;left:201"><nobr>of sequences so far:</nobr></div>
+<div style="position:absolute;top:12957;left:358"><nobr>Figure 13: Sequence Theorems</nobr></div>
+<div style="position:absolute;top:13000;left:250"><nobr>A theorem can be instantiated (e.g., in the previous example, the type</nobr></div>
+<div style="position:absolute;top:13018;left:201"><nobr>parameter A can be substituted with a type expression that is acceptable in</nobr></div>
+<div style="position:absolute;top:13036;left:201"><nobr>the context of the sequent under consideration). We will later show how this is</nobr></div>
+<div style="position:absolute;top:13054;left:201"><nobr>achieved.</nobr></div>
+<div style="position:absolute;top:13099;left:451"><nobr>11</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:13243;left:0"><hr><table width="100%" border="0"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="12"><b>Page 12</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:15px;font-family:Times">
+<div style="position:absolute;top:13433;left:201"><nobr>3.6 Specify an Inference Rule</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:13462;left:201"><nobr>Inference rules are proof rules that can be used to: (1) infer new hypotheses in</nobr></div>
+<div style="position:absolute;top:13480;left:201"><nobr>a proof, or (2) split the goal into sub-goals, or (3) discharge a proof obligation.</nobr></div>
+<div style="position:absolute;top:13498;left:201"><nobr>The general structure of an inference rule is as follows:</nobr></div>
+<div style="position:absolute;top:13549;left:400"><nobr>Given</nobr></div>
+<div style="position:absolute;top:13571;left:456"><nobr>G0, ..., Gn</nobr></div>
+<div style="position:absolute;top:13594;left:401"><nobr>Infer</nobr></div>
+<div style="position:absolute;top:13616;left:456"><nobr>I</nobr></div>
+<div style="position:absolute;top:13649;left:223"><nobr>where each of G0, ..., Gn and I is an Event-B predicate. The above inference</nobr></div>
+<div style="position:absolute;top:13667;left:201"><nobr>rule can be read in the following two ways : ”given conditions G0, ..., Gn one</nobr></div>
+<div style="position:absolute;top:13685;left:201"><nobr>can infer I”, and ”one can prove I, if one can prove each of G0, ..., Gn”.</nobr></div>
+<div style="position:absolute;top:13703;left:223"><nobr>Inference rules can be defined as part of a block of ”Proof Rules”. Each</nobr></div>
+<div style="position:absolute;top:13721;left:201"><nobr>proof rules block may contain a number of metavariables, rewrite rules and in-</nobr></div>
+<div style="position:absolute;top:13739;left:201"><nobr>ference rules, see figure<a href="#12"> </a>14. To create a rules block, under the heading ”PROOF</nobr></div>
+<div style="position:absolute;top:13760;left:201"><nobr>RULES” in the structured editor, press</nobr></div>
+<div style="position:absolute;top:13760;left:480"><nobr>.</nobr></div>
+<div style="position:absolute;top:13930;left:363"><nobr>Figure 14: Proof Rules Block</nobr></div>
+<div style="position:absolute;top:13966;left:223"><nobr>Metavariables define the variables used to specify proof rules. Considering</nobr></div>
+<div style="position:absolute;top:13984;left:201"><nobr>figure<a href="#12"> 15</a>, each metavariable has a name and a type. For our example, we need</nobr></div>
+<div style="position:absolute;top:14002;left:201"><nobr>one metavariable s.</nobr></div>
+<div style="position:absolute;top:14129;left:344"><nobr>Figure 15: Defining a Metavariable</nobr></div>
+<div style="position:absolute;top:14168;left:223"><nobr>The example in figure 16<a href="#13"> </a>shows an inference rule concerning finiteness of</nobr></div>
+<div style="position:absolute;top:14186;left:201"><nobr>sequences:</nobr></div>
+<div style="position:absolute;top:14204;left:223"><nobr>The applicability of a proof rule indicates whether the rule should be applied</nobr></div>
+<div style="position:absolute;top:14222;left:201"><nobr>automatically or interactively. The description provides a human-readable view</nobr></div>
+<div style="position:absolute;top:14240;left:201"><nobr>of the rule. The description provided will be the tool tip for the rule in the</nobr></div>
+<div style="position:absolute;top:14287;left:451"><nobr>12</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:14431;left:0"><hr><table width="100%" border="0"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="13"><b>Page 13</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:14779;left:308"><nobr>Figure 16: Sequence Finiteness Inference Rule</nobr></div>
+<div style="position:absolute;top:14826;left:201"><nobr>proof UI. The inference rule in figure<a href="#13"> 17</a> is an automatic rule that states that</nobr></div>
+<div style="position:absolute;top:14844;left:201"><nobr>the tail of a non-empty sequence is a sequence.</nobr></div>
+<div style="position:absolute;top:15050;left:328"><nobr>Figure 17: Sequence Tail Inference Rule</nobr></div>
+<div style="position:absolute;top:15475;left:451"><nobr>13</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:15619;left:0"><hr><table width="100%" border="0"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="14"><b>Page 14</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:19px;font-family:Times">
+<div style="position:absolute;top:15806;left:201"><nobr>4 Scoping, Colour coding and Using of Theories</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:15844;left:201"><nobr>A theorypath is a means to introduce the deployed theories in a project scope.</nobr></div>
+<div style="position:absolute;top:15861;left:223"><nobr>In order to use a math extension, defined in a theory, in a project scope:</nobr></div>
+<div style="position:absolute;top:15892;left:219"><nobr>1. Deploy the theory A theory can be deployed by a pop-up menu , by</nobr></div>
+<div style="position:absolute;top:15910;left:238"><nobr>right-clicking on the theory, figure <a href="#14">18.</a> .</nobr></div>
+<div style="position:absolute;top:16133;left:279"><nobr>Figure 18: Deploy Theory Button in Event-B Explorer</nobr></div>
+<div style="position:absolute;top:16174;left:219"><nobr>2. Import the deployed theory in a theorypath, which is defined in</nobr></div>
+<div style="position:absolute;top:16192;left:238"><nobr>the project scope. By clicking the button</nobr></div>
+<div style="position:absolute;top:16192;left:535"><nobr>, a wizard that enables the</nobr></div>
+<div style="position:absolute;top:16210;left:238"><nobr>creation of a new theorypath is initiated (See figure <a href="#14">19)</a>.</nobr></div>
+<div style="position:absolute;top:16383;left:272"><nobr>Figure 19: New Theorypath Button in Event-B Explorer</nobr></div>
+<div style="position:absolute;top:16424;left:223"><nobr>Colour Coding: A theory is created white , after deploying it turns to</nobr></div>
+<div style="position:absolute;top:16442;left:201"><nobr>green</nobr></div>
+<div style="position:absolute;top:16442;left:255"><nobr>. When a deployed green theory is modified, it turns to amber ,</nobr></div>
+<div style="position:absolute;top:16460;left:201"><nobr>indicating that the deployed version is different to the developing version.</nobr></div>
+<div style="position:absolute;top:16487;left:223"><nobr>• White : New theory: the theory is new and has not been deployed yet.</nobr></div>
+<div style="position:absolute;top:16506;left:238"><nobr>(such a theory is not accessible to be imported either in another theory or</nobr></div>
+<div style="position:absolute;top:16524;left:238"><nobr>a theorypath)</nobr></div>
+<div style="position:absolute;top:16552;left:223"><nobr>• Green : Deployed updated theory: the theory is deployed and updated.</nobr></div>
+<div style="position:absolute;top:16581;left:223"><nobr>• Amber : Deployed out-dated theory: the theory is modified after de-</nobr></div>
+<div style="position:absolute;top:16600;left:238"><nobr>ployment; the deployed version of the theory is not sync with the current</nobr></div>
+<div style="position:absolute;top:16618;left:238"><nobr>state of the theory.</nobr></div>
+<div style="position:absolute;top:16663;left:451"><nobr>14</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:16807;left:0"><hr><table width="100%" border="0"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="15"><b>Page 15</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:17031;left:223"><nobr>• A machine/context accesses (local/global) theories imported directly or</nobr></div>
+<div style="position:absolute;top:17050;left:238"><nobr>indirectly by a theorypath within the same project as the machine/context.</nobr></div>
+<div style="position:absolute;top:17079;left:223"><nobr>• A theorypath can imports deployed (local/global) theories.</nobr></div>
+<div style="position:absolute;top:17109;left:223"><nobr>• A theory can import deployed (local/global) theories.</nobr></div>
+<div style="position:absolute;top:17174;left:223"><nobr>• A local theory in a project scope is a theory defined inside a project;</nobr></div>
+<div style="position:absolute;top:17192;left:238"><nobr>Whereas a global theory is a theory defined in a separated project.</nobr></div>
+<div style="position:absolute;top:17221;left:223"><nobr>• As illustrated in figure<a href="#15"> 20</a>, if theory T1 in Prj1 imports theory T2 from</nobr></div>
+<div style="position:absolute;top:17240;left:238"><nobr>Prj2, and theory T1 is imported in a theorypath created in the project</nobr></div>
+<div style="position:absolute;top:17258;left:238"><nobr>Prj3; Then T1 is directly and T2 is indirectly accessible in the Prj3 scope.</nobr></div>
+<div style="position:absolute;top:17638;left:343"><nobr>Figure 20: Accessibility of Theories</nobr></div>
+<div style="position:absolute;top:17851;left:451"><nobr>15</nobr></div>
+</span></font>
+
+
+</div></body></html>
