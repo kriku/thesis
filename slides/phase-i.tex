@@ -5,7 +5,7 @@
 \graphicspath{ {images/} }
 \usepackage{adjustbox}
 \usepackage{wrapfig}
-
+\usepackage{epigraph}
 \usepackage{multicol}
 
 \title{Code Generation for Event-B}
@@ -20,11 +20,36 @@
     \tableofcontents
   \end{frame}
 
-  \section{Formal Methods}
+  \section{Assists techniques}
+  \begin{frame}{Formal \& Simulation differences}
+    \begin{columns}
+      \column{0.4\textwidth}
+        \textbf{Two main approaches:}\\
+        - Formal methods\\
+        - Software testing\\
+      \column{0.5\textwidth}
+      {\color{black!50}
+        \epigraph{Testing shows the presence, not the absence of bugs}
+        {Edsger Dijkstra}
+      }
+    \end{columns}
+  \end{frame} 
 
+  \begin{frame}{Formal \& Simulation differences}
+    Simulation verification closure
+    \includegraphics[width=\linewidth]{test_coverage}
+  \end{frame} 
+
+  \begin{frame}{Formal \& Simulation differences}
+    Formal verification closure
+    \includegraphics[width=\linewidth]{formal_coverage}
+  \end{frame} 
+
+  \section{Formal Methods}
+  
   \begin{frame}{Introduction Formal Methods}
-    \textbf{Formal specification languages} are mathematically-based languages whose
-    purpose is to aid the construction of systems and software. 
+    \textbf{Formal methods} are techniques used to model complex systems as
+    mathematical entities.
 
     % Rationale:
 
@@ -33,13 +58,12 @@
     % - increase our understanding of a system\\
     % - eliminates ambiguity and reduces the chance of errors\\
 
-    Roughly, formal design can be seen as a three step process:\\
+    Three step process:\\
     \begin{enumerate}
       \item Formal Specification
       \item Verification
       \item Implementation
     \end{enumerate}
-    
 
   \end{frame}
 
@@ -49,6 +73,7 @@
         \textbf{Benefits:}\\
         - Discipline\\
         - Precision\\
+        - Clarity\\
       \column{0.6\textwidth}
         \textbf{Weaknesses:}\\
         - Expense\\
@@ -105,7 +130,7 @@
 
   \begin{frame}{The Event-B Methodology}
 
-    Formal method is derived from the B method
+    The Event-B Methodology is derived from the B method
 
     \textbf{Event-B models:}\\
     - machines (the dynamic part. e.g. variables, invariants, events)\\
