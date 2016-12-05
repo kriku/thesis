@@ -3,8 +3,9 @@
 \contentsline {section}{Background Theory}{6}{section*.4}
 \contentsline {subsection}{Formal methods}{6}{section*.5}
 \contentsline {subsection}{Event-B}{6}{section*.6}
-\contentsline {subsection}{Rodin Platform}{8}{section*.7}
-\contentsline {section}{Overview of Task Specification and Project Schedule}{9}{section*.8}
-\contentsline {section}{Review of Tasks}{10}{section*.9}
-\contentsline {section}{Interim Results}{11}{section*.10}
-\contentsline {section}{Short Term Plans}{12}{section*.11}
+\contentsline {subsection}{Rodin Platform}{7}{section*.7}
+\contentsline {subsection}{Eiffel Programming Language}{7}{section*.8}
+\contentsline {section}{Task Specification, Project Schedule}{8}{section*.9}
+\contentsline {section}{Review of Tasks}{9}{section*.10}
+\contentsline {section}{Interim Results}{10}{section*.11}
+\contentsline {section}{Short Term Plans}{11}{section*.12}
